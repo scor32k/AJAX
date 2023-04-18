@@ -1,0 +1,235 @@
+WSN PRACS
+
+WSN P4 Create and simlulate a simple ADHOC Network 
+Steps:
+1.Add Devices:
+1941 Router
+2950-24 Swtich
+AccessPoint-PT
+1 PC (for connection)
+5 PCs (for wireless connetion)
+
+2. Make Connections
+PC to switch
+Router to switch
+Access Point to switch
+
+3. Add Configurations for the router
+GigabitEthernet0/0 - Port Status: On, IPv4: 192.168.2.1
+
+4. Add PC0 Configurations
+Desktop - IP Congifuration - Interface - Static - IPv4: 192.168.2.2
+
+5. Add Access Point Configurations
+Config - Interface - Port 1 - Post Status: 0N - SSID: Prac4 - Authentication - WEP - WEP Key: 0123456789
+
+6. Add wireless port in other 5 pcs
+Turn off - remove the existing port - add the wireless port - turn on
+Desktop - IP Configuration - Interface - Static - IPv4: 192.168.2.3/4/5/6 - Default Gateway: 192.168.2.1 (router ipv4)
+
+7. PC Wireless
+Connect - refresh -  select prac4 - connect - enter WEP Key1: 0123456789 - connect
+
+8. Command Prompt
+pimg other pcs from pc0
+
+
+
+WSN P5 Understanding, reading and analysing Routing Table of a Network.
+Steps:
+1. Add Devices:
+2 Router-PTs
+2 2950T-24 Switches
+2 Access Point-PT
+6 PC-PTs
+
+2. Make connections
+Access Point-PT to Switch x2 (Auto Choose)
+Switch to Router-PT x2 (Auto Choose)
+Router0 to Router1 (Copper Cross Over)
+
+3. Add router0 and router1 configurations
+Router0
+Interface - FastEthernet0/0 - Port Status: On - IPv4: 192.168.2.1
+Interface - FastEhternet1/0 - Port Status: On - IPv4: 10.0.0.1
+
+Router1
+Interface - FastEthernet0/0 - Port Status: On - IPv4: 192.168.3.1
+Interface - FastEhternet1/0 - Port Status: On - IPv4: 10.0.0.2
+
+4. Configure Access Points
+Access Point0
+Config - Interface - Port - Port Status: On - SSID: cs1 - Authentication: WEP - WEP Key: 0123456789 
+
+Access Point1
+Config - Interface - Port - Port Status: On - SSID: cs2 - Authentication: WEP - WEP Key: 0123456789 
+
+5. Add PC Configurations
+Turn off - remove the existing port - add the wireless port - turn on
+Config - Interface - Wireless0 - Port Status: On - SSID: cs1/2 - Authentication: WEP - WEP Key: 0123456789 
+
+6. PC Wireless
+Connect - refresh -  select cs1 - connect - enter WEP Key1: 0123456789 - connect
+
+7. Desktop - IP Configuration - Static - IPv4: 192.168.2.2/3/4 or 192.168.3.2/3/4
+
+8. Ping from pc to pc
+
+
+
+WSN P6 Create a basic MANET implementation simulation for packet animation and packet trace.
+Steps:
+1. Adding the devices:
+3 1841 Routers
+3 Switch-PTs
+3 AccessPoint-PTs
+2 Laptops
+2 PC-PTs
+2 Smartphones
+
+2. Add serial ports in the router
+Pysical - turn off - WIC-2T - turn on
+
+3. Adding Connections
+Access Point - Switch - Router: Auto Choose
+Router0 - Router1: Copper Cross Over
+Router1 - Router2: Auto Choose
+
+4. Configure Routers:
+Router0:
+Config - Interface - FastEthernet0/0 - Port Status: on - IPv4: 10.0.0.1
+FastEthernet0/1 - Port Status: on - IPv4: 192.168.1.1
+RIP - Add : 10.0.0.0, 192.168.1.0, 192.168.2.0, 192.168.3.0
+
+Router1:
+Config - Interface - FastEthernet0/0 - Port Status: on - IPv4: 10.0.0.2
+FastEthernet0/1 - Port Status: on - IPv4: 192.168.2.1
+Serial0/1/0 - Port Status: on - Clock Rate: 1200 - IPv4: 192.168.4.1
+RIP - Add : 10.0.0.0, 192.168.1.0, 192.168.2.0, 192.168.3.0, 192.168.4.0
+
+Router2
+Config - Interface - FastEthernet0/0 - Port Status: on - IPv4: 10.0.0.3
+FastEthernet0/1 - Port Status: on - IPv4: 192.168.3.1
+Serial0/1/0 - Port Status: on - IPv4: 192.168.4.2
+RIP - Add : 10.0.0.0, 192.168.1.0, 192.168.2.0, 192.168.3.0, 192.168.4.0
+
+5. Configure the Access Points
+Access Point0/1/2
+Config - Interface - Port 1 -  Port Status: on - SSID: cs1/2/3 - Authentication - WEP - WEP Key: 0123456789
+
+6. Configure the devices
+Laptop0/1
+turn off - remove port - drag WPC300N port - turn on
+Config - Interface - Wireless0 - Port Status: on - SSID: cs1 - Authentication - WEP - WEP Key: 0123456789 - IP Configuration - Static - IPv4: 192.168.1.2/3
+
+PC0/1
+turn off - remove port - drag WPC300N port - turn on
+Config - Interface - Wireless0 - Port Status: on - SSID: cs2 - Authentication - WEP - WEP Key: 0123456789 - IP Configuration - Static - IPv4: 192.168.2.2/3
+
+Smartphone0/1
+Config - Interface - Wireless0 - Port Status: on - SSID: cs3 - Authentication - WEP - WEP Key: 0123456789 - IP Configuration - Static - IPv4: 192.168.3.2/3
+
+7. Check Connextions
+
+8. Ping devices to confirm connections
+
+
+
+WSN P7 Implement a Wireless Sensor Network Simulation
+Steps:
+1. Add the devices
+2 WRT300N Wireless Router
+2 Laptops
+4 PC-PTs
+
+2. Connection
+Router0 - Router1 (auto choose)
+
+3. Add Details to the routers
+Router0 - GUI
+Wireless - Wireless Security - Security Mode: WPA2 PSK - Passphrase: csrouter1 - Save Settings (scroll down)
+Wireless - Base Wireless Settings - SSID: CS - Enabled - Save Settings
+Administration - Remote Management: Enabled - Save Settings
+
+Router1 - GUI
+Wireless - Wireless Security - Security Mode: WPA2 PSK - Passphrase: csrouter2 - Save Settings (scroll down)
+Wireless - Base Wireless Settings - SSID: IT - Enabled - Save Settings
+Administration - Remote Management: Enabled - Save Settings
+
+4. Add Wireless Modules in the devices
+turn off - remove port - drag WPC300N port - turn on
+
+5. Add Wireless Configuration
+PC-PT/Laptop
+Config - Interface - Wireless0 - Port Status: on - SSID: CS/IT - Authentication - WPA2-PSK - PSK Pass Phrase: csrouter1/2
+Desktop - PC Wireless - Connect - Refresh - Select - connect - Enter Pre-shared Key - Connect
+
+6. Check Connections 
+
+7. Trasnfer messages to confirm connections
+Select Message(Mail) Icon - Select 1 Device - Select the device u want to send the message to. If successful, it is working.
+
+
+
+WSN P8 Create MAC Protocol simulation implementation for Wireless Sensor Network.
+Steps:
+1. Add Devices
+1 HomeRouter-PT-AC
+3 PC-PTs
+3 Laptops
+
+2. Configure the devices
+turn off - remove port - drag WPC300N port - turn on
+
+3. Check connections
+
+4. Configure the wireless router by adding the MAC Addresses in the MAC Filter
+GUI - Wireless - Wireless MAC Filter - Enabled - Permite PCs listed below to access wireless network - Add All the MAC Addresses - Save Setting (scroll down)
+For Adding MAC Address:
+PCs/Laptops Config - Interface - Wireless0 - Copy the MAC Address
+Paste it in the GUI Window (ex: 0001.9624.9D6E -> 00:01:96:24:9D:6E) 
+
+5. Ping Devices to check if its working.
+Pinging PC0 from Laptop0
+On PC0:
+CMD - ipconfig - copy the IPv4 address
+On Laptop0:
+CMD - Ping (the copied IPv4 address of PC0)
+
+
+
+WSN P9 Create a mobile network using Cell Tower, Central Office Server, Web Browser and Web server, Simulate the connections between them.
+Steps
+1. Adding Devices
+1 HomeRouter-PT-AC
+1 Hub-PT
+1 1841 Router
+1 Smartphone
+1 Cel-Tower
+1 Central Office Server
+1 Server-PT
+
+2. Connections
+HomeRouter - Hub (Copper Cross Over Internet - FastEthernet0)
+Hub - 1841 Router (Auto Choose)
+1841 - Server-PT (Auto Choose)
+Hub - Central-Office-Server (Auto Choose)
+Cel-Tower - Central-Office-Server (Auto Choose)
+
+3. Turn on the port status for 1841 router
+FastEthernet0/0 and FastEthernet1/0
+
+4. Add the static IP in the home router
+Wireless Router0 - Config - Interface - Internet - Static - IPv4 Address: 20.0.0.1 - Default Gateway: 20.0.0.2
+
+5. Add the IP Adresses in the 1841 router
+Router0 - Config - Interface - FastEthernet0/0 - IPv4: 20.0.0.2 (Default Gateway)
+FastEthernet1/0 - IPv4: 21.0.0.1
+Router0 - Config - Routing - RIP - Network: ADD (20.0.0.0, 21.0.0.0, 22.0.0.0)
+
+6. Add IP for the server
+Server0 - Config - Interface - FastEthernet0/0 - IPv4: 21.0.0.2 
+Server0 - Config - Global - Default Gateway: 20.0.0.2
+
+7. Send Message from smartphone to server
+Click the Mail Icon - Selct Smartphone - Select Server0
