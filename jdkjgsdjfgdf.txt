@@ -1,0 +1,485 @@
+Write a python code to load and prepare the data.
+
+1) Convert text values to numbers
+Code:
+import pandas as pd
+data = {
+'Maths': ['30','75','60','77','92'],
+       	 'Science': ['25','27','95','58','41'],
+       	 'Physics': ['53','48','42','29','83']
+        }
+df = pd.DataFrame(data)
+print ("original dataframe=\n",df)
+print ("data tyes in data frame=\n",df.dtypes)
+df = df.astype(float)  #convert to float
+print ("converted dataframe=\n",df)
+print ("data tyes in new data frame=\n",df.dtypes)
+
+2) Select relevant parameters using the correlation
+
+Code:
+import pandas as pd
+ 
+df = {
+  "numbers": [2, 3, 4],
+  "squares": [4, 9, 16]
+}
+data = pd.DataFrame(df)
+print("correlation=\n",data.corr())
+subdata=data.corr()[['squares']]
+print("coorelation only for squares=\n",subdata)
+
+
+3) Remove or fill missing values
+Code:
+import pandas as pd
+import numpy as np
+
+ df = {  
+"productid": [11, 12, 13,14,15],
+  "name": ['soap', 'powder','shampoo','sanitzer','handwash'],
+  "price": [np.nan, 60, 150,30,90],
+  "quantity": [2, np.nan, 10,np.nan,5],
+  }
+
+data = pd.DataFrame(df)
+print("data frame=\n",data)
+data=data.astype( {
+    "price":pd.Int64Dtype(),
+    "quantity":pd.Int64Dtype(),
+      }   )
+
+print("dropna(axis=1)=\n",data.dropna(axis=1))
+print("dropna(how='all')=\n",data.dropna(how="all"))
+print("dropna(how='any')=\n",data.dropna(how="any"))
+print("fillna(value=0)=\n",data.fillna(value=0))
+
+
+
+4) Remove outliers
+Code:
+import pandas as pd
+import numpy as np
+ 
+df = {
+  "productid": [11, 12, 13,14,15],
+  "name": ['soap', 'powder','shampoo','sanitzer','handwash'],
+  "price": [np.nan, 60, 150,30,90],
+  "quantity": [2, np.nan, 10,np.nan,5],
+  }
+data = pd.DataFrame(df)
+print("original data frame=\n",data)
+print("clipped data frame=\n",data.price.clip(lower=50,upper=100))
+choice=[2,5,15,20]
+print("filter data frame=\n",data[data.quantity.isin(choice)])
+
+----------------------------------
+
+Create a scatterplot for visualization and train a linear model for making a prediction.
+
+ (pip install scikit-learn)
+File1: students.csv (create in notepad or excel)
+hours,scores
+2.5, 21
+5.1, 47
+3.2, 27
+8.5, 75
+3.5, 30
+Code:
+
+
+import numpy as np 
+import pandas as pd 
+from matplotlib import pyplot as plt 
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split 
+
+score_df = pd.read_csv('students.csv') 
+print(score_df.head())
+X = score_df.iloc[:,:1].values 
+y = score_df.iloc[:, 1].values
+print("x=",X,"\n y=",y)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
+print("x_train=",X_train,"\n y_train=",y_train)
+print("x_test=",X_test,"\n y_test=",y_test)s
+regressor = LinearRegression() 
+regressor.fit(X_train, y_train)
+y_pred = regressor.predict(X_test)
+print("y_pred=",y_pred)
+plt.scatter(X_train, y_train,color='g') 
+plt.plot(X_test, y_pred, 'ro') 
+plt.show()
+
+
+----------------------------------
+
+Build a classifier for the MNIST dataset.
+
+
+Code: for OVA 
+
+from sklearn.datasets import fetch_openml
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+from sklearn.linear_model import SGDClassifier
+import numpy as np
+mnist = fetch_openml('mnist_784', version=1)
+X, y = mnist["data"], mnist["target"]
+print(X)
+print(y)
+
+y = y.astype(np.uint8)
+X_train, X_test, y_train, y_test = X[:60000], X[60000:], y[:60000], y[60000:]
+y_train_5 = (y_train == 5)y_test_5 = (y_test == 5)
+
+some_digit =  X.to_numpy()[0]
+some_digit_image = some_digit.reshape(28, 28)
+plt.imshow(some_digit_image, cmap = mpl.cm.binary, interpolation="nearest")
+plt.axis("off")
+plt.show()
+
+sgd_clf = SGDClassifier(random_state=42)
+sgd_clf.fit(X_train, y_train_5)
+print(sgd_clf.predict([some_digit]))
+
+some_digit_scores = sgd_clf.decision_function([some_digit])
+print("decision scores=",some_digit_scores)
+max_arg=np.argmax(some_digit_scores)
+print("max argument=",max_arg)
+print("sgd classes=",sgd_clf.classes_)
+
+
+
+
+
+Using OvO classifier
+
+Code:
+from sklearn.datasets import fetch_openml
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+from sklearn.linear_model import SGDClassifier
+import numpy as np
+from sklearn.model_selection import cross_val_predict
+from sklearn.metrics import confusion_matrix
+
+mnist = fetch_openml('mnist_784', version=1)
+X, y = mnist["data"], mnist["target"]
+print(X)
+print(y)
+some_digit =  X.to_numpy()[4]
+y = y.astype(np.uint8)
+X_train, X_test, y_train, y_test = X[:60000], X[60000:], y[:60000], y[60000:]
+sgd_clf = SGDClassifier(random_state=42)
+sgd_clf.fit(X_train, y_train)
+print(sgd_clf.predict([some_digit]))
+
+some_digit_scores = sgd_clf.decision_function([some_digit])
+print("decision scores=",some_digit_scores)
+max_arg=np.argmax(some_digit_scores)
+print("max argument=",max_arg)
+print("sgd classes=",sgd_clf.classes_)
+
+
+---------------------------------------
+
+Implement linear regression and polynomial regression algorithms in python.
+
+Code:
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+dataset = pd.read_csv('Position_Salaries.csv') # read the dataset
+dataset
+X = dataset.iloc[:, 1:-1].values # extracts features from the dataset
+y = dataset.iloc[:, -1].values # extracts the labels from the dataset
+print("X=\n",X," and y=\n",y)
+
+from sklearn.linear_model import LinearRegression # import the Linear Regression model
+lin_reg = LinearRegression() # creat model object
+lin_reg.fit(X, y) # fits the model to the training data
+#LinearRegression(copy_X=True, fit_intercept=True, n_jobs=None, normalize=False)
+
+lin_pred = lin_reg.predict([[6.5]])  
+print("linear regression prediction=",lin_pred)
+
+from sklearn.preprocessing import PolynomialFeatures # importing a class for Polynomial Regression
+poly_regr = PolynomialFeatures(degree = 4) # our polynomial model is of order 4
+X_poly = poly_regr.fit_transform(X) # transforms the features to the polynomial form
+print('X_poly=',X_poly)
+lin_reg_2 = LinearRegression() # creates a linear regression object
+lin_reg_2.fit(X_poly, y) # fits the linear regression object to the polynomial features
+
+poly_pred = lin_reg_2.predict(poly_regr.fit_transform([[6.5]]))  
+print("polynomial regression prediction=",poly_pred)
+
+plt.scatter(X, y, color = 'red') # plotting the training set linear
+plt.plot(X, lin_reg.predict(X), color = 'blue') # plotting the linear regression line
+plt.plot(6.5,lin_pred , 'go') 
+plt.title('(Linear Regression)') # adding a tittle to our plot
+plt.xlabel('Position Level') # adds a label to the x-axis
+plt.ylabel('Salary') # adds a label to the y-axis
+plt.show() # prints our plot
+
+plt.scatter(X, y, color = 'red') # plotting the training set ploynimial
+plt.plot(X, lin_reg_2.predict(poly_regr.fit_transform(X)), color = 'blue') # plotting the polynomial regression line
+plt.plot(6.5,poly_pred , 'go')
+plt.title('(Polynomial Regression)') # adding a tittle to our plot
+plt.xlabel('Position level') # adding a label to the x-axis
+plt.ylabel('Salary') # adding a label to the y-axis
+plt.show() # prints our plot
+
+-----------------------
+Implement logistic regression algorithm in python.
+
+Code:
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import accuracy_score
+
+dataset = pd.read_csv("User_Data.csv")
+# input
+x = dataset.iloc[:, [2, 3]].values
+# output
+y = dataset.iloc[:, 4].values
+X_train, X_test, y_train, y_test = train_test_split(x, y, test_size = 0.25, random_state = 0)
+print("X_train=\n",X_train)
+print("X_test=\n",X_test)
+print("y_train=\n",y_train)
+print("y_test=\n",y_test)
+
+sc_x = StandardScaler()
+xtrain = sc_x.fit_transform(X_train) 
+xtest = sc_x.transform(X_test)
+
+print("xtrain scaled=\n",xtrain)
+print("xtest scaled=\n",xtest)
+
+
+classifier = LogisticRegression(random_state = 0)
+classifier.fit(xtrain, y_train)
+y_pred = classifier.predict(xtest)
+print("y_pred=",y_pred)
+
+cm = confusion_matrix(y_test, y_pred)
+
+print ("Confusion Matrix : \n", cm)
+
+print ("Accuracy : ", accuracy_score(y_test, y_pred))
+
+-----------------------------
+Create and train Support Vector Machine.
+
+Code:
+# importing required libraries
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.svm import SVC
+
+# reading csv file and extracting class column to y.
+data = pd.read_csv("studentsnew.csv")
+a = np.array(data)
+y = a[:,3]
+# extracting two features
+x = np.column_stack((data.maths,data.science))
+
+print("x=",x)
+print("y=",y)
+  
+clf = SVC(kernel='linear') 
+ 
+# fitting x samples and y classes 
+clf.fit(x, y)
+
+print("clf.predict([[50, 80]])=",clf.predict([[50, 80]]))
+plt.scatter(x[:,0],x[:,1],c=y,s=50,cmap='spring')
+plt.show()
+
+---
+To print line 
+[
+the equation of a hyperplane is w.x+b=0 where w is a vector normal to hyperplane and b is an offset.
+The separating hyperplane has the form w[0]*x+w[1]*y+intercept=0. So
+w[1]*y=-w[0]*x-intercept
+Now divide both sides by w[1], and you get
+y=-(w[0]/w[1])*x-intercept/w[1].]
+
+# importing required libraries
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.svm import SVC
+
+# reading csv file and extracting class column to y.
+data = pd.read_csv("studentsnew.csv")
+a = np.array(data)
+y = a[:,3]
+# extracting two features
+x = np.column_stack((data.maths,data.science))
+
+print("x=",x)
+print("y=",y)
+  
+clf = SVC(kernel='linear') 
+ 
+# fitting x samples and y classes 
+clf.fit(x, y)
+print("clf.predict([[50, 80]])=",clf.predict([[50, 80]]))
+
+# get the weight values for the linear equation from the trained SVM model
+w = clf.coef_[0]
+# get the y-offset for the linear equation
+a = -w[0] / w[1]
+# make the x-axis space for the data points
+XX = np.linspace(0, 80)
+
+# get the y-values to plot the decision boundary
+yy = a * XX - clf.intercept_[0] / w[1]
+
+# plot the decision boundary
+plt.plot(XX, yy, 'k-')
+
+plt.scatter(x[:,0],x[:,1],c=y,s=50,cmap='spring')
+plt.show()
+
+---------------------------
+ Implement classification using Decision tree classifier.
+ 
+ Code:
+import pandas
+from sklearn import tree
+from sklearn.tree import DecisionTreeClassifier
+import matplotlib.pyplot as plt
+
+df = pandas.read_csv("data.csv")
+
+d = {'UK': 0, 'USA': 1, 'N': 2}
+df['Nationality'] = df['Nationality'].map(d)
+d = {'YES': 1, 'NO': 0}
+df['Go'] = df['Go'].map(d)
+
+features = ['Age', 'Experience', 'Rank', 'Nationality']
+
+X = df[features]
+y = df['Go']
+
+dtree = DecisionTreeClassifier(random_state=11)
+dtree = dtree.fit(X, y)
+
+tree.plot_tree(dtree, feature_names=features)
+plt.show()
+print(dtree.predict([[40, 10, 7, 1]]))
+
+-----------------------------
+
+Implement Dimensionality reduction algorithm.
+
+Code:
+from sklearn.datasets import fetch_openml
+from sklearn.linear_model import SGDClassifier
+import numpy as np
+from sklearn.decomposition import PCA
+mnist = fetch_openml('mnist_784', version=1)
+X, y = mnist["data"], mnist["target"]
+y = y.astype(np.uint8)
+X_train, X_test, y_train, y_test = X[:60000], X[60000:], y[:60000], y[60000:]
+print("original X_train dimensions=",X_train.shape)
+pca = PCA(n_components = 144)
+X_reduced = pca.fit_transform(X_train)
+print("reduced X_train dimensions=",X_reduced.shape)
+some_digit =  X_reduced[0]
+sgd_clf = SGDClassifier(random_state=42)
+sgd_clf.fit(X_reduced, y_train)
+print("digit prediction for X[0]=",sgd_clf.predict([some_digit]))
+
+
+--------------------
+Implement clustering using k-means and DBSCAN algorithm.
+
+
+Code:
+import pandas as pd #creating and manipulating dataframes
+import matplotlib.pyplot as plt #visuals
+import seaborn as sns #visuals
+
+from sklearn.cluster import KMeans #K-Means
+from sklearn.cluster import DBSCAN #DBSCAN
+
+blobs = pd.read_csv('five_blobs.csv')
+print(blobs)
+#scatter plot
+plt.figure(figsize = (8,4), dpi = 100)
+sns.scatterplot(data=blobs,x='x',y='y')
+plt.title("NORMAL")
+plt.show()
+#K-Means
+model = KMeans(n_clusters = 3)
+labels = model.fit_predict(blobs)
+plt.figure(figsize = (8,4), dpi = 100)
+sns.scatterplot(data=blobs,x='x',y='y',hue=labels,palette='Set1')
+plt.title("KMEANS")
+plt.show()
+
+inertias = []
+
+for i in range(1,11):
+    kmeans = KMeans(n_clusters=i)
+    kmeans.fit(blobs)
+    inertias.append(kmeans.inertia_)
+
+plt.plot(range(1,11), inertias, marker='o')
+plt.title('Elbow method')
+plt.xlabel('Number of clusters')
+plt.ylabel('Inertia')
+plt.show()
+
+#DBSCAN
+model = DBSCAN(eps=0.7)
+labels = model.fit_predict(blobs)
+plt.figure(figsize = (8,4), dpi = 100)
+sns.scatterplot(data=blobs,x='x',y='y',hue=labels,palette='Set1')
+plt.title("DBSCAN")
+plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
